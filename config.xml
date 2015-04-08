@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "nl.fournier.paperless"
+        version     = "0.0.1"
+        versionCode = "10" >
+
+        <!-- versionCode is optional and Android only -->
+
+       <!-- <preference name="phonegap-version" value="3.6.3" /> -->
+
+        <name>Paper Less</name>
+
+        <description>
+        An app to help me to go paperless
+        </description>
+
+        <author href="http://fournier.nl" email="wim@fournier.nl">
+        Wim Fournier
+        </author>
+
+        <gap:platform name="android" />
+
+    </widget>

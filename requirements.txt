@@ -1,0 +1,4 @@
+wheel==0.23.0
+Flask==0.10.1
+gunicorn==19.1.1
+pyinsane
