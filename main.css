@@ -29,6 +29,11 @@ html /deep/ paper-dialog.error {
     color: lightgray;
 }
 
+html /deep/ paper-dialog.notification {
+    background: #4242f4;
+    color: lightgray;
+}
+
 html /deep/ paper-dialog::shadow #scroller {
     height: 200px;
     width: 330px;
