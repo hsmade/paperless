@@ -7,9 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0,maximum-scale = 1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=yes" />
     <script src="phonegap.js"></script>
+    <script src="lib/jquery-1.11.1.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+    <script src="lib/main.js"></script>
+    <link rel="stylesheet" href="main.css">
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="elements.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="bower_components/paper-item/paper-item.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
     <title>PaperLess</title>
 </head>
-<body>
-
+<body onload="javascript:populate_menu()">
+<paper-button id="scan" raised class="colored" role="button" tabindex="0" onclick="javascript:scan();">scan</paper-button>
+<paper-button id="save" disabled raised role="button" tabindex="1" onclick="javascript:save();">save</paper-button> <br/>
+<paper-dropdown-menu id="destination" label="Select destination">
+    <paper-dropdown class="dropdown">
+        <core-menu id="destination_list" class="menu">
+        </core-menu>
+    </paper-dropdown>
+</paper-dropdown-menu><br/>
+<paper-dialog id="dialog" heading="Error">
+  <p>Please select a destination before saving</p>
+</paper-dialog>
+<img id="preview" src="" width="319" height="439"/>
 </body>
 </html>

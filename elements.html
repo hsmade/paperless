@@ -1,0 +1,8 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/core-ajax/core-ajax.html">
+<polymer-element name="scanner-preview" noscript>
+  <template>
+    <core-ajax url="http://localhost:5000/test" auto response="{{resp}}"></core-ajax>
+    <textarea value="{{resp}}"></textarea>
+  </template>
+</polymer-element>

@@ -1,0 +1,36 @@
+:host([disabled]) {
+  background: #eaeaea;
+  color: #a8a8a8;
+  cursor: auto;
+  pointer-events: none;
+}
+
+paper-button[raised].colored {
+    background: #4285f4;
+    color: #ffffff;
+}
+
+paper-button[raised].failed {
+    background: #f44242;
+    color: #ffffff;
+}
+
+paper-button[raised].succeeded {
+    background: #42f442;
+    color: #ffffff;
+}
+
+html /deep/ paper-dialog {
+    color: lightgray;
+}
+
+html /deep/ paper-dialog.error {
+    background: #f44242;
+    color: lightgray;
+}
+
+html /deep/ paper-dialog::shadow #scroller {
+    height: 130px;
+    width: 300px;
+}
+

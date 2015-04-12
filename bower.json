@@ -1,0 +1,21 @@
+{
+  "name": "paperless",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hsmade/paperless",
+  "authors": [
+    "Wim Fournier <wim@fournier.nl"
+  ],
+  "description": "A project to help me go paperless",
+  "main": "index.html",
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5"
+  }
+}

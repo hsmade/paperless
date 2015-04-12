@@ -11,9 +11,46 @@ from flask import Flask, redirect, url_for, Response, request
 import pyinsane.abstract as pyinsane
 from tempfile import NamedTemporaryFile
 import os
+import json
+import shutil
+from datetime import datetime
 
 app = Flask(__name__)
-images = []
+images = [{'path': '/tmp/tmpLOKWW9', 'id': 'tmpLOKWW9'}]
+base_path = '/home/wfournier/SpiderOak Hive/paperless'
+
+
+@app.route('/test')
+def test():
+    return 'tmpLOKWW9', 200
+
+
+@app.route('/destinations')
+def destinations():
+    directories = []
+    for root, dirs, files in os.walk(base_path):
+        directories.append(root[len(base_path) + 1:])
+    return json.dumps(directories), 200
+
+
+@app.route('/save')
+def save():
+    image_id = request.args.get('id', '')
+    location = request.args.get('location', '')
+    file_name = '{datetime}.jpg'.format(datetime=datetime.strftime(datetime.now(), '%Y%m%d %H%M%S'))
+    if not id or not location:
+        return 'Missing id or location', 500
+    image = find_image(image_id)
+    if image:
+        try:
+            shutil.move(image['path'], os.path.join(base_path, location, file_name))
+        except shutil.Error as e:
+            print e
+            return str(e), 500
+        return 'OK', 200
+    else:
+        return 'Image not found', 404
+
 
 @app.route('/scan')
 def scan():
@@ -45,8 +82,16 @@ def scan():
     image.save(tmp_file.name, "JPEG")
     image_id = tmp_file.name.rpartition('/')[-1]
     images.append({'id': image_id, 'path': tmp_file.name})
-    print 'redirecting'
-    return redirect(url_for('view', id=image_id))
+    return image_id, 200
+
+
+def find_image(image_id):
+    image = ''
+    for item in images:
+        if item['id'] == image_id:
+            print 'found image at {}'.format(item['path'])
+            image = item
+    return image
 
 
 @app.route('/view')
@@ -55,13 +100,9 @@ def view():
     image_id = request.args.get('id', '')
     if not image_id:
         return 'No image ID given', 500
-    image = ''
-    for item in images:
-        if item['id'] == image_id:
-            print 'found image at {}'.format(item['path'])
-            image = open(item['path']).read()
+    image = find_image(image_id)
     if image:
-        return Response(image, mimetype='image/jpeg')
+        return Response(open(image['path']).read(), mimetype='image/jpeg')
     else:
         return 'Image not found', 404
 
@@ -79,5 +120,20 @@ def delete():
     return 'Image not found', 404
 
 
+@app.after_request
+def add_cors(resp):
+    """ Ensure all responses have the CORS headers. This ensures any failures are also accessible
+        by the client. """
+    resp.headers['Access-Control-Allow-Origin'] = request.headers.get('Origin','*')
+    resp.headers['Access-Control-Allow-Credentials'] = 'true'
+    resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS, GET'
+    resp.headers['Access-Control-Allow-Headers'] = request.headers.get(
+        'Access-Control-Request-Headers', 'Authorization' )
+    # set low for debugging
+    if app.debug:
+        resp.headers['Access-Control-Max-Age'] = '1'
+    return resp
+
+
 if __name__ == '__main__':
-    app.run(debug=True,host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0')
