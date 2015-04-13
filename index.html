@@ -13,18 +13,19 @@
     <script src="lib/main.js"></script>
     <link rel="stylesheet" href="main.css">
     <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="elements.html">
     <link rel="import" href="bower_components/paper-button/paper-button.html">
     <link rel="import" href="bower_components/paper-dropdown/paper-dropdown.html">
     <link rel="import" href="bower_components/core-menu/core-menu.html">
     <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
     <link rel="import" href="bower_components/paper-item/paper-item.html">
     <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="elements.html">
     <title>PaperLess</title>
 </head>
 <body onload="javascript:populate_locations()">
 <paper-button id="scan" raised class="colored" role="button" tabindex="0" onclick="javascript:scan();">scan</paper-button>
-<paper-button id="save" disabled raised role="button" tabindex="1" onclick="javascript:save();">save</paper-button> <br/>
+<paper-button id="save" disabled raised role="button" tabindex="1" onclick="javascript:save_dialog();">save</paper-button> <br/>
 <paper-dropdown-menu id="destination" label="Select destination">
     <paper-dropdown class="dropdown">
         <core-menu id="destination_list" class="menu">
@@ -35,6 +36,12 @@
     <p></p>
     <paper-button affirmative="" autofocus="" role="button" tabindex="0">Ok</paper-button>
 </paper-dialog>
+<save-dialog id="save-dialog"></save-dialog>
+
+<!-- <paper-dialog id="save-dialog" heading="Save">
+    <paper-input id="file-name" label="File name:" floatinglabel></paper-input>
+    <paper-button affirmative="" autofocus="" role="button" tabindex="0" onclick="javascript:save();">Ok</paper-button>
+</paper-dialog> -->
 <img id="preview" src="" width="319" height="439"/>
 </body>
 </html>

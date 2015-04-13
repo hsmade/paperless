@@ -14,14 +14,16 @@ import os
 import json
 import shutil
 from datetime import datetime
+import time
 
 app = Flask(__name__)
 images = [{'path': '/tmp/tmpLOKWW9', 'id': 'tmpLOKWW9'}]
 base_path = '/home/wfournier/SpiderOak Hive/paperless'
 
 
-@app.route('/test')
+# @app.route('/scan')
 def test():
+    time.sleep(1)
     return 'tmpLOKWW9', 200
 
 
@@ -35,15 +37,21 @@ def destinations():
 
 @app.route('/save')
 def save():
+    # return 'OK', 200
     image_id = request.args.get('id', '')
     location = request.args.get('location', '')
-    file_name = '{datetime}.jpg'.format(datetime=datetime.strftime(datetime.now(), '%Y%m%d %H%M%S'))
+    name = request.args.get('name', '')
+    file_name = '{datetime} {name}.jpg'.format(
+        datetime=datetime.strftime(datetime.now(), '%Y%m%d-%H%M%S'),
+        name=name)
     if not id or not location:
         return 'Missing id or location', 500
     image = find_image(image_id)
     if image:
         try:
-            shutil.move(image['path'], os.path.join(base_path, location, file_name))
+            destination_path = os.path.join(base_path, location, file_name)
+            print 'Saving {} to {}'.format(image['path'], destination_path)
+            shutil.move(image['path'], destination_path)
         except shutil.Error as e:
             print e
             return str(e), 500
