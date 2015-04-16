@@ -21,7 +21,7 @@ paper-button[raised].succeeded {
 }
 
 html /deep/ paper-dialog {
-    color: lightgray;
+    color: black;
 }
 
 html /deep/ paper-dialog.error {
