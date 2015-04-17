@@ -3,26 +3,6 @@
 <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 
-<!--
-<polymer-element name="save-dialog" attributes="file_name">
-    <template>
-        <paper-dialog id="the-dialog" heading="Save">
-            <paper-input label="File name:" floatinglabel value="{{ file_name }}"></paper-input>
-            <paper-button affirmative="" autofocus="" role="button" tabindex="0" onclick="save();">Ok</paper-button>
-        </paper-dialog>
-    </template>
-    <script>
-        Polymer({
-          open_dialog: function() {
-              console.log('template.toggle() called');
-              this.$.the-dialog.toggle();
-          },
-          ready: function() { console.log('template instance ready'); }
-        });
-    </script>
-</polymer-element>
--->
-
 <polymer-element name="save-dialog" attributes="file_name">
     <template>
         <paper-dialog id="dialog" heading="Save">
@@ -38,6 +18,33 @@
               // console.log(this.$.dialog);
           },
           file_name: ''
+        });
+    </script>
+</polymer-element>
+
+<polymer-element name="settings-dialog" attributes="">
+    <template>
+        <paper-dialog id="dialog" heading="Save">
+            <paper-input label="Resolution:" floatinglabel value="{{ resolution }}"></paper-input>
+            <paper-input label="API endpoint:" floatinglabel value="{{ api_endpoint }}"></paper-input>
+            <!-- TODO toggle_dialog doesn't work -->
+            <paper-button affirmative="" autofocus="" role="button" tabindex="0" onclick="{{toggle_dialog}}">Close</paper-button>
+        </paper-dialog>
+    </template>
+    <script>
+        Polymer({
+          toggle_dialog: function() {
+              console.log('template.toggle() called');
+              this.$.dialog.toggle();
+          },
+          resolution: get_resolution(),
+          api_endpoint: get_api_endpoint(),
+          resolutionChanged: function(old_value, new_value) {
+              set_resolution(new_value);
+          },
+          api_endpointChanged: function(old_value, new_value) {
+              set_api_endpoint(new_value);
+          }
         });
     </script>
 </polymer-element>

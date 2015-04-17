@@ -25,7 +25,9 @@
 </head>
 <body onload="javascript:populate_locations()">
 <paper-button id="scan" raised class="colored" role="button" tabindex="0" onclick="javascript:scan();">scan</paper-button>
-<paper-button id="save" disabled raised role="button" tabindex="1" onclick="javascript:save_dialog();">save</paper-button> <br/>
+<paper-button id="save" disabled raised role="button" tabindex="1" onclick="javascript:save_dialog();">save</paper-button>
+<paper-button id="save"  raised role="colored" tabindex="2" onclick="javascript:settings_dialog();">settings</paper-button>
+<br/>
 <paper-dropdown-menu id="destination" label="Select destination">
     <paper-dropdown class="dropdown">
         <core-menu id="destination_list" class="menu">
@@ -37,6 +39,7 @@
     <paper-button affirmative="" autofocus="" role="button" tabindex="0">Ok</paper-button>
 </paper-dialog>
 <save-dialog id="save-dialog"></save-dialog>
+<settings-dialog class="settings-dialog" id="settings-dialog"></settings-dialog>
 <img id="preview" src="" width="319" height="439"/>
 </body>
 </html>

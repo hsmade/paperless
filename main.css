@@ -35,7 +35,12 @@ html /deep/ paper-dialog.notification {
 }
 
 html /deep/ paper-dialog::shadow #scroller {
-    height: 200px;
+    height: 300px;
     width: 330px;
 }
 
+/*TODO doesnt work*/
+html /deep/ paper-dialog.settings-dialog {
+    height: 300px;
+    width: 330px;
+}
