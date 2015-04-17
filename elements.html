@@ -27,8 +27,7 @@
         <paper-dialog id="dialog" heading="Save">
             <paper-input label="Resolution:" floatinglabel value="{{ resolution }}"></paper-input>
             <paper-input label="API endpoint:" floatinglabel value="{{ api_endpoint }}"></paper-input>
-            <!-- TODO toggle_dialog doesn't work -->
-            <paper-button affirmative="" autofocus="" role="button" tabindex="0" onclick="{{toggle_dialog}}">Close</paper-button>
+            <paper-button affirmative="" autofocus="" role="button" tabindex="0" onclick="settings_dialog()">Close</paper-button>
         </paper-dialog>
     </template>
     <script>
